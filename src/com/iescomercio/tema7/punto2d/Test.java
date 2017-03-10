@@ -14,6 +14,9 @@ public class Test {
         
         System.out.println(p2);
         
+        long l = 1000;
+        int i = (int)l;
+        System.out.println(i);
     }
     
 }
