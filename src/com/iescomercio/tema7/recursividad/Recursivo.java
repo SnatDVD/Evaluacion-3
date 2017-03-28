@@ -34,4 +34,33 @@ public class Recursivo {
         }
         return suma;
     } 
+    
+    public static void toBinaryRecursivo(int num){
+        if(num < 2){
+            System.out.print(num);
+        } else {
+            toBinaryRecursivo(num / 2);
+            System.out.print(num % 2);
+        }
+    }
+    
+    public static void toBinaryIterativo(int num){
+        int aux = num;
+        String resultado = "";
+        
+        while (aux > 1){
+            if(aux % 2 == 1){
+                resultado = "1" + resultado;
+            } else {
+                resultado = "0" + resultado;
+            }
+            aux = aux / 2;
+        }
+        if(aux == 1){
+            resultado = "1" + resultado;
+        } else if(aux == 0){
+            resultado = "0" + resultado;
+        }
+        System.out.println(resultado);
+    }
 }

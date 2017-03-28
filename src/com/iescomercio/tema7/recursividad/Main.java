@@ -11,7 +11,11 @@ public class Main {
         
         //System.out.println(Recursivo.sumaRecursivo("1234"));
         
-        System.out.println(Recursivo.sumaIterativo("1234"));
+        //System.out.println(Recursivo.sumaIterativo("1234"));
+        
+        Recursivo.toBinaryRecursivo(19);
+        
+        //Recursivo.toBinaryIterativo(1);
     }
     
 }
