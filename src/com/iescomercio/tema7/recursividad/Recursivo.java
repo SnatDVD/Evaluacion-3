@@ -1,6 +1,8 @@
 
 package com.iescomercio.tema7.recursividad;
 
+import java.util.Arrays;
+
 public class Recursivo {
     
     public static void darVueltaRecursivo(String cadena){
@@ -33,7 +35,7 @@ public class Recursivo {
             suma = suma + Integer.parseInt(numero.charAt(i) + "");
         }
         return suma;
-    } 
+    }
     
     public static void toBinaryRecursivo(int num){
         if(num < 2){
@@ -63,4 +65,53 @@ public class Recursivo {
         }
         System.out.println(resultado);
     }
+    
+    public static int sumaArrayRecursivo(int[] numeros){
+        if(numeros.length == 1){
+            return numeros[0];
+        } else {
+            int[] aux = Arrays.copyOf(numeros, numeros.length - 1);
+            return numeros[numeros.length - 1] + sumaArrayRecursivo(aux);
+        }
+    }
+    
+    public static int sumaArrayIterativo(int[] numeros){
+        int suma = 0;
+        for(int c = 0; c < numeros.length; c++){
+            suma = suma + numeros[c];
+        }
+        return suma;
+    }
+    
+    public static int minValorArray(int[] numeros){
+        if(numeros.length == 1){
+            return numeros[0];
+        } else {
+            int[] aux = Arrays.copyOf(numeros, numeros.length - 1);
+            if (numeros[0] > numeros[numeros.length - 1]){
+                aux[0] = numeros[numeros.length - 1];
+            }
+            return minValorArray(aux);
+        }
+    }
+    
+    public static int maxValorArray(int[] numeros){
+        if(numeros.length == 1){
+            return numeros[0];
+        } else {
+            int[] aux = Arrays.copyOf(numeros, numeros.length - 1);
+            if (numeros[0] < numeros[numeros.length - 1]){
+                aux[0] = numeros[numeros.length - 1];
+            }
+            return maxValorArray(aux);
+        }
+    }
+    
+    public static int[] maxYMinArray(int[] numeros){
+        int[] aux = new int[2];
+        aux[0] = maxValorArray(numeros);
+        aux[1] = minValorArray(numeros);
+        return aux;
+    }
+    
 }
