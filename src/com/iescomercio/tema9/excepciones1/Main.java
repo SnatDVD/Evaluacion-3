@@ -11,9 +11,16 @@ public class Main {
         
         //System.out.println(c.metodo2(100, 0));
         
-        System.out.println(c.metodo3(256));
+        //System.out.println(c.metodo3(256));
         
-        System.out.println(c.metodo5(156));
+        //System.out.println(c.metodo5(156));
+        
+        Log a = new Log();
+        
+        a.anadir("Hola");
+        a.anadir("Bartolo");
+        
+        System.out.println(a.toString());
     }
     
 }

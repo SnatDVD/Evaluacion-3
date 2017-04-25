@@ -77,7 +77,7 @@ public class ControlDeErrores {
      public Integer metodo5(int indice){
 
         LinkedList<Integer> lista = new LinkedList();
-
+        
         rellenaLista(lista);
         return lista.get(indice);
     }
