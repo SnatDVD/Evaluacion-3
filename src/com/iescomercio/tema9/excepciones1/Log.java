@@ -31,7 +31,7 @@ public class Log {
         Iterator it = s.iterator();
         
         while(it.hasNext()){
-            
+            aux.append(mapa.get(it.next()));
         }
         
         return aux.toString();
