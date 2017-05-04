@@ -1,5 +1,5 @@
 
-package com.iescomercio.tema10.swing;
+package com.iescomercio.tema_10.swing;
 
 public class Main {
 
