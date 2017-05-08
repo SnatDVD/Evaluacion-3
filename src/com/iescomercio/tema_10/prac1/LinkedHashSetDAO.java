@@ -1,21 +1,20 @@
-
 package com.iescomercio.tema_10.prac1;
 
 import java.util.LinkedHashSet;
 
-public class ClienteColeccionDAO implements InterfazDAO {
+public class LinkedHashSetDAO<T> implements InterfazDAO {
 
-    private LinkedHashSet<Cliente> lista;
+    private LinkedHashSet<T> lista;
     private int indice;
 
-    public ClienteColeccionDAO() {
-        lista = new LinkedHashSet<Cliente>();
+    public LinkedHashSetDAO() {
+        lista = new LinkedHashSet<T>();
         indice = 0;
     }
 
     @Override
     public boolean alta(Object o) {
-        Cliente aux = (Cliente) o;
+        T aux = (T) o;
 
         if (!lista.contains(aux)) {
             lista.add(aux);
@@ -27,7 +26,7 @@ public class ClienteColeccionDAO implements InterfazDAO {
 
     @Override
     public boolean baja(Object o) {
-        Cliente aux = (Cliente) o;
+        T aux = (T) o;
 
         if (lista.contains(aux)) {
             lista.remove(aux);
@@ -39,17 +38,17 @@ public class ClienteColeccionDAO implements InterfazDAO {
 
     @Override
     public boolean modificacion(Object viejo, Object nuevo) {
-        Cliente nuevoAux = (Cliente) nuevo;
-        Cliente viejoAux = (Cliente) viejo;
-        Cliente cli;
+        T nuevoAux = (T) nuevo;
+        T viejoAux = (T) viejo;
+        T cli;
 
         if (lista.contains(viejoAux) && !lista.contains(nuevoAux)) {
             Object[] aux = lista.toArray();
-            LinkedHashSet<Cliente> listaNueva = new LinkedHashSet();
-            
-            for(int c = 0; c < aux.length; c++){
-                cli = (Cliente) aux[c];
-                if(cli.equals(viejoAux)){
+            LinkedHashSet<T> listaNueva = new LinkedHashSet();
+
+            for (int c = 0; c < aux.length; c++) {
+                cli = (T) aux[c];
+                if (cli.equals(viejoAux)) {
                     listaNueva.add(nuevoAux);
                 } else {
                     listaNueva.add(cli);
@@ -64,10 +63,10 @@ public class ClienteColeccionDAO implements InterfazDAO {
 
     @Override
     public Object consulta(Object o) {
-        Cliente aux = (Cliente) o;
+        T aux = (T) o;
 
         if (!lista.isEmpty()) {
-            for (Cliente c : lista) {
+            for (T c : lista) {
                 if (aux.equals(c)) {
                     return c;
                 }
@@ -92,7 +91,7 @@ public class ClienteColeccionDAO implements InterfazDAO {
     public Object ultimo() {
         if (!lista.isEmpty()) {
             Object[] aux = lista.toArray();
-            
+
             indice = aux.length - 1;
             return aux[aux.length - 1];
         } else {
@@ -102,9 +101,9 @@ public class ClienteColeccionDAO implements InterfazDAO {
 
     @Override
     public Object siguiente(Object o) {
-        if(indice < (lista.size()-1)){
+        if (indice < (lista.size() - 1)) {
             Object[] aux = lista.toArray();
-            
+
             indice++;
             return aux[indice];
         } else {
@@ -114,9 +113,9 @@ public class ClienteColeccionDAO implements InterfazDAO {
 
     @Override
     public Object anterior(Object o) {
-        if(indice > 0){
+        if (indice > 0) {
             Object[] aux = lista.toArray();
-            
+
             indice--;
             return aux[indice];
         } else {

@@ -1,6 +1,7 @@
-
 package com.iescomercio.tema_10.prac2;
 
+import com.iescomercio.tema_10.prac1.Cliente;
+import com.iescomercio.tema_10.prac1.LinkedHashSetDAO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +17,8 @@ public class DatosCliente extends JFrame {
             jtxProvincia, jtxTelefono;
     private JSpinner jspEdad;
     private JPanel jpPanel;
-    
-    
+    private LinkedHashSetDAO<Cliente> clientes;
+
     //Image icon = Toolkit.getDefaultToolkit().getImage("/com/iescomercio/tema10/prac2/inicio.png");
     Image icon = new ImageIcon(getClass().getResource("/com/iescomercio/tema_10/prac2/inicio.png")).getImage();
 
@@ -26,15 +27,17 @@ public class DatosCliente extends JFrame {
         inicializar();
         meteElementos();
         establecerOyente();
-        
-        this.setIconImage(icon);     
+
+        this.setIconImage(icon);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
     private void inicializar() {
-        
+
+        clientes = new LinkedHashSetDAO<>();
+
         jbtInicio = new JButton("");
         jbtInicio.setIcon(new javax.swing.ImageIcon(getClass().
                 getResource("/com/iescomercio/tema_10/prac2/inicio.png")));
@@ -122,6 +125,7 @@ public class DatosCliente extends JFrame {
         jbtAlta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                incorporarCliente();
                 popupAdvertencia("Alta");
             }
         });
@@ -137,10 +141,28 @@ public class DatosCliente extends JFrame {
                 popupAdvertencia("Modificar");
             }
         });
+        jbtSiguiente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCliente((Cliente) clientes.siguiente(e));
+            }
+        });
+        jbtAnterior.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCliente((Cliente) clientes.anterior(e));
+            }
+        });
     }
 
     private void popupAdvertencia(String nombreAdver) {
         JOptionPane.showMessageDialog(this, "REALIZADA¡¡", nombreAdver,
+                JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    private void popupError(Exception e) {
+        JOptionPane.showMessageDialog(this, "Error", e.getMessage(),
                 JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -155,6 +177,35 @@ public class DatosCliente extends JFrame {
         jtxProvincia.setText("");
         jspEdad.setValue(0);
 
+    }
+
+    private void incorporarCliente() {
+        clientes.alta(getClienteActual());
+    }
+
+    private Cliente getClienteActual() {
+        try {
+            Integer i = (Integer) jspEdad.getValue();
+
+            return new Cliente(jtxDNI.getText(), jtxNombre.getText(),
+                    jtxApellidos.getText(), jtxLoc.getText(),
+                    jtxDireccion.getText(), jtxProvincia.getText(),
+                    jtxTelefono.getText(), i);
+        } catch (Exception e) {
+            popupError(e);
+            return null;
+        }
+    }
+
+    private void mostrarCliente(Cliente cli) {
+        jtxDNI.setText(cli.getDni());
+        jtxNombre.setText(cli.getNombre());
+        jtxApellidos.setText(cli.getApellidos());
+        jtxDireccion.setText(cli.getDireccion());
+        jtxLoc.setText(cli.getLoc());
+        jtxProvincia.setText(cli.getProvincia());
+        jtxTelefono.setText(cli.getTlfno());
+        jspEdad.setValue(cli.getEdad());
     }
 
 }

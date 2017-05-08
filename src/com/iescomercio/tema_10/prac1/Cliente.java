@@ -2,19 +2,84 @@
 package com.iescomercio.tema_10.prac1;
 
 public class Cliente {
-    private int cod;
+    private String dni;
     private String nombre;
+    private String apellidos;
+    private String loc;
+    private String direccion;
+    private String provincia;
+    private String tlfno;
+    private int edad;
+
+    public Cliente(String dni, String nombre, String apellidos, String loc, String direccion, String provincia, String tlfno, int edad) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.loc = loc;
+        this.direccion = direccion;
+        this.provincia = provincia;
+        this.tlfno = tlfno;
+        this.edad = edad;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getLoc() {
+        return loc;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getTlfno() {
+        return tlfno;
+    }
+
+    public void setTlfno(String tlfno) {
+        this.tlfno = tlfno;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
+    public void setDni(String cod) {
+        this.dni = cod;
     }
 
-    public int getCod() {
-        return cod;
+    public String getDni() {
+        return dni;
     }
 
     public void setNombre(String nombre) {
@@ -39,15 +104,10 @@ public class Cliente {
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (this.cod != other.cod) {
+        if (!this.getDni().equals(other.getDni())) {
             return false;
         }
         return true;
     }
-
-    
-    
-    
-    
     
 }
