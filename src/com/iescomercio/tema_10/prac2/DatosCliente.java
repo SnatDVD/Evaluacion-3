@@ -144,13 +144,25 @@ public class DatosCliente extends JFrame {
         jbtSiguiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mostrarCliente((Cliente) clientes.siguiente(e));
+                mostrarCliente((Cliente) clientes.siguiente(getClienteActual()));
             }
         });
         jbtAnterior.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mostrarCliente((Cliente) clientes.anterior(e));
+                mostrarCliente((Cliente) clientes.anterior(getClienteActual()));
+            }
+        });
+        jbtFinal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCliente((Cliente) clientes.ultimo());
+            }
+        });
+        jbtInicio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCliente((Cliente) clientes.primero());
             }
         });
     }
@@ -158,13 +170,11 @@ public class DatosCliente extends JFrame {
     private void popupAdvertencia(String nombreAdver) {
         JOptionPane.showMessageDialog(this, "REALIZADA¡¡", nombreAdver,
                 JOptionPane.INFORMATION_MESSAGE);
-
     }
 
     private void popupError(Exception e) {
         JOptionPane.showMessageDialog(this, "Error", e.getMessage(),
                 JOptionPane.INFORMATION_MESSAGE);
-
     }
 
     private void clickBotonNuevo() {
@@ -176,7 +186,6 @@ public class DatosCliente extends JFrame {
         jtxDireccion.setText("");
         jtxProvincia.setText("");
         jspEdad.setValue(0);
-
     }
 
     private void incorporarCliente() {

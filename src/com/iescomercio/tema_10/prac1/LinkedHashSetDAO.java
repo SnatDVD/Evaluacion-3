@@ -5,11 +5,9 @@ import java.util.LinkedHashSet;
 public class LinkedHashSetDAO<T> implements InterfazDAO {
 
     private LinkedHashSet<T> lista;
-    private int indice;
 
     public LinkedHashSetDAO() {
         lista = new LinkedHashSet<T>();
-        indice = 0;
     }
 
     @Override
@@ -80,7 +78,6 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
         if (!lista.isEmpty()) {
             Object[] aux = lista.toArray();
 
-            indice = 0;
             return aux[0];
         } else {
             return false;
@@ -92,13 +89,39 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
         if (!lista.isEmpty()) {
             Object[] aux = lista.toArray();
 
-            indice = aux.length - 1;
             return aux[aux.length - 1];
         } else {
             return null;
         }
     }
+    
+    @Override
+    public Object siguiente(Object o) {
+        Cliente cli = (Cliente) o;
+        Object[] listaAux = lista.toArray();
+        
+        for(int c = 0; c < (listaAux.length-1); c++){
+            if(cli.equals((Cliente)listaAux[c])){
+                return listaAux[c+1];
+            }
+        }
+        return cli;
+    }
 
+    @Override
+    public Object anterior(Object o) {
+        Cliente cli = (Cliente) o;
+        Object[] listaAux = lista.toArray();
+        
+        for(int c = 1; c < listaAux.length; c++){
+            if(cli.equals((Cliente)listaAux[c])){
+                return listaAux[c-1];
+            }
+        }
+        return cli;
+    }
+
+    /*
     @Override
     public Object siguiente(Object o) {
         if (indice < (lista.size() - 1)) {
@@ -122,5 +145,8 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
             return null;
         }
     }
-
+    */
+    
+    
+    
 }
