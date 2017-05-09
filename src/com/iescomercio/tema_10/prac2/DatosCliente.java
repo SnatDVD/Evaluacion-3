@@ -132,12 +132,15 @@ public class DatosCliente extends JFrame {
         jbtBaja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                eliminarCliente(getClienteActual());
+                clickBotonNuevo();
                 popupAdvertencia("Baja");
             }
         });
         jbtModificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                clientes.modificacion(getClienteActual(), getClienteActual());
                 popupAdvertencia("Modificar");
             }
         });
@@ -172,8 +175,8 @@ public class DatosCliente extends JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void popupError(Exception e) {
-        JOptionPane.showMessageDialog(this, "Error", e.getMessage(),
+    private void popupError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -192,29 +195,43 @@ public class DatosCliente extends JFrame {
         clientes.alta(getClienteActual());
     }
 
+    private void eliminarCliente(Cliente cli) {
+        try {
+            clientes.baja(cli);
+        } catch (NullPointerException e) {
+            popupError("El cliente introducido no existe");
+        }
+    }
+
     private Cliente getClienteActual() {
         try {
-            Integer i = (Integer) jspEdad.getValue();
+            if (jtxDNI.getText().equals("")) {
+                return null;
+            } else {
+                Integer i = (Integer) jspEdad.getValue();
 
-            return new Cliente(jtxDNI.getText(), jtxNombre.getText(),
-                    jtxApellidos.getText(), jtxLoc.getText(),
-                    jtxDireccion.getText(), jtxProvincia.getText(),
-                    jtxTelefono.getText(), i);
+                return new Cliente(jtxDNI.getText(), jtxNombre.getText(),
+                        jtxApellidos.getText(), jtxLoc.getText(),
+                        jtxDireccion.getText(), jtxProvincia.getText(),
+                        jtxTelefono.getText(), i);
+            }
         } catch (Exception e) {
-            popupError(e);
+            popupError("Ha ocurrido un error inesperado");
             return null;
         }
     }
 
     private void mostrarCliente(Cliente cli) {
-        jtxDNI.setText(cli.getDni());
-        jtxNombre.setText(cli.getNombre());
-        jtxApellidos.setText(cli.getApellidos());
-        jtxDireccion.setText(cli.getDireccion());
-        jtxLoc.setText(cli.getLoc());
-        jtxProvincia.setText(cli.getProvincia());
-        jtxTelefono.setText(cli.getTlfno());
-        jspEdad.setValue(cli.getEdad());
+        if (cli != null) {
+            jtxDNI.setText(cli.getDni());
+            jtxNombre.setText(cli.getNombre());
+            jtxApellidos.setText(cli.getApellidos());
+            jtxDireccion.setText(cli.getDireccion());
+            jtxLoc.setText(cli.getLoc());
+            jtxProvincia.setText(cli.getProvincia());
+            jtxTelefono.setText(cli.getTlfno());
+            jspEdad.setValue(cli.getEdad());
+        }
     }
 
 }

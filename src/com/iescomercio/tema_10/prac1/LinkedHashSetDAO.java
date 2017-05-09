@@ -3,17 +3,17 @@ package com.iescomercio.tema_10.prac1;
 import java.util.LinkedHashSet;
 
 public class LinkedHashSetDAO<T> implements InterfazDAO {
-
+    
     private LinkedHashSet<T> lista;
-
+    
     public LinkedHashSetDAO() {
         lista = new LinkedHashSet<T>();
     }
-
+    
     @Override
     public boolean alta(Object o) {
         T aux = (T) o;
-
+        
         if (!lista.contains(aux)) {
             lista.add(aux);
             return true;
@@ -21,11 +21,11 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
             return false;
         }
     }
-
+    
     @Override
     public boolean baja(Object o) {
         T aux = (T) o;
-
+        
         if (lista.contains(aux)) {
             lista.remove(aux);
             return true;
@@ -33,17 +33,17 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
             return false;
         }
     }
-
+    
     @Override
     public boolean modificacion(Object viejo, Object nuevo) {
         T nuevoAux = (T) nuevo;
         T viejoAux = (T) viejo;
         T cli;
-
-        if (lista.contains(viejoAux) && !lista.contains(nuevoAux)) {
+        
+        if (lista.contains(viejoAux) && viejoAux.equals(nuevoAux)) {
             Object[] aux = lista.toArray();
             LinkedHashSet<T> listaNueva = new LinkedHashSet();
-
+            
             for (int c = 0; c < aux.length; c++) {
                 cli = (T) aux[c];
                 if (cli.equals(viejoAux)) {
@@ -58,11 +58,11 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
             return false;
         }
     }
-
+    
     @Override
     public Object consulta(Object o) {
         T aux = (T) o;
-
+        
         if (!lista.isEmpty()) {
             for (T c : lista) {
                 if (aux.equals(c)) {
@@ -72,23 +72,23 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
         }
         return null;
     }
-
+    
     @Override
     public Object primero() {
         if (!lista.isEmpty()) {
             Object[] aux = lista.toArray();
-
+            
             return aux[0];
         } else {
-            return false;
+            return null;
         }
     }
-
+    
     @Override
     public Object ultimo() {
         if (!lista.isEmpty()) {
             Object[] aux = lista.toArray();
-
+            
             return aux[aux.length - 1];
         } else {
             return null;
@@ -97,28 +97,45 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
     
     @Override
     public Object siguiente(Object o) {
-        Cliente cli = (Cliente) o;
         Object[] listaAux = lista.toArray();
-        
-        for(int c = 0; c < (listaAux.length-1); c++){
-            if(cli.equals((Cliente)listaAux[c])){
-                return listaAux[c+1];
+        if (o == null) {
+            if (lista.isEmpty()) {
+                return null;
+            } else {
+                return listaAux[0];
             }
+            
+        } else {
+            Cliente cli = (Cliente) o;
+            
+            for (int c = 0; c < (listaAux.length - 1); c++) {
+                if (cli.equals((Cliente) listaAux[c])) {
+                    return listaAux[c + 1];
+                }
+            }
+            return cli;
         }
-        return cli;
     }
-
+    
     @Override
     public Object anterior(Object o) {
-        Cliente cli = (Cliente) o;
         Object[] listaAux = lista.toArray();
-        
-        for(int c = 1; c < listaAux.length; c++){
-            if(cli.equals((Cliente)listaAux[c])){
-                return listaAux[c-1];
+        if (o == null) {
+            if (lista.isEmpty()) {
+                return null;
+            } else {
+                return listaAux[0];
             }
+        } else {
+            Cliente cli = (Cliente) o;
+            
+            for (int c = 1; c < listaAux.length; c++) {
+                if (cli.equals((Cliente) listaAux[c])) {
+                    return listaAux[c - 1];
+                }
+            }
+            return cli;
         }
-        return cli;
     }
 
     /*
@@ -145,8 +162,5 @@ public class LinkedHashSetDAO<T> implements InterfazDAO {
             return null;
         }
     }
-    */
-    
-    
-    
+     */
 }
