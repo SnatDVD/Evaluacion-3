@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.iescomercio.tema_10.cardLayout;
 
 import com.iescomercio.tema_10.*;
@@ -13,10 +9,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.*;
 
-/**
- *
- * @author Vespertino
- */
 public class VentanaAlquiler extends JFrame {
 
     private JPanel jpBase, jpBotones, jpClienteNorte, jpClienteCentro,  
@@ -25,7 +17,9 @@ public class VentanaAlquiler extends JFrame {
 
     private JLabel jlbClienteDNI, jlbClienteNombre, jlbClienteNombreEspacio,
             jlbClienteDir, jlbClienteDirEspacio, jlbClienteTlfno,
-            jlbClienteTlfnoEspacio, jlbClienteEdad, jlbClienteEdadEspacio;
+            jlbClienteTlfnoEspacio, jlbClienteEdad, jlbClienteEdadEspacio,
+            jlbBarcoMatricula, jlbBarcoEslora, jlbBarcoAñoMatriculacion,
+            jlbNumPasajeros;
     
     private JButton jbtSiguiente, jbtCancelar, jbtClienteBuscar, jbtBarcoBuscar;
     
