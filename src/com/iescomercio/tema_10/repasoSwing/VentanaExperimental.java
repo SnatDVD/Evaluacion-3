@@ -67,6 +67,10 @@ public class VentanaExperimental extends JFrame{
         jpPestañaOeste = new JPanel
             (new BoxLayout(jpPestañaOeste, BoxLayout.Y_AXIS));
         
+        jlbBartoloPregunta = new JLabel("¿Qué es más?");
+        jlbBartoloDescripcion = new JLabel("Descripcion");
+        jlbBartoloFoto = new JLabel("Bartolo1.jpg");
+        
         
     }
     
